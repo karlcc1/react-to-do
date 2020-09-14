@@ -7,37 +7,14 @@ import './App.css';
 function App() {
   const [inputText, setInputText] = useState("");
   const [toDoList, setToDoList] = useState([]);
-  const [status, setStatus] = useState("all");
-  const [ftoDoList, setfToDoList] = useState([]);
-
-  const filterHandler = () => {
-    switch(status) {
-      case 'completed':
-        setfToDoList(toDoList.filter(
-          (item : any) => item.completed === true
-        ));
-        break;
-
-      case 'uncompleted':
-        setfToDoList(toDoList.filter(
-          (item : any) => item.completed === false
-        ));
-        break;
-
-      default:
-        setfToDoList(toDoList);
-        break;
-    }
-  };
 
   useEffect(() => {
     getLocalToDos();
   }, []);
 
   useEffect(() => {
-    filterHandler();
     saveLocalToDos();
-  }, [status, toDoList]);
+  }, [toDoList]);
 
   const saveLocalToDos = () => {
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
@@ -60,12 +37,10 @@ function App() {
       inputText={inputText}
       setInputText={setInputText} 
       toDoList={toDoList}
-      setToDoList={setToDoList}
-      setStatus={setStatus} />      
+      setToDoList={setToDoList} />      
       <ToDoContainer 
       setToDoList={setToDoList}
-      toDoList={toDoList}
-      ftoDoList={ftoDoList} />
+      toDoList={toDoList} />
     </div>
   );
 }
