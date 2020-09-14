@@ -3,7 +3,7 @@ trigger:
 
 variables:
   rootDir: 'react-to-do'
-  buildDir: '/build'
+  buildDir: '$(rootDir)/build'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,7 +15,7 @@ steps:
     checkLatest: true
 
 - script: |
-    # cd $(rootDir)
+    cd $(rootDir)
     npm install
     npm run build
     cd ..
