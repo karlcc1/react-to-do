@@ -15,7 +15,7 @@ steps:
     checkLatest: true
 
 - script: |
-    cd $(rootDir)
+    # cd $(rootDir)
     npm install
     npm run build
     cd ..
