@@ -22,6 +22,12 @@ function Form(props : any) {
         props.setToDoList([]);
     };
 
+    const statusHandler = (e : React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value);
+        props.setStatus(e.target.value);
+        
+    }
+
     return (
         <div style={{border: "1px solid black"}}>
             <h1>Form</h1>
@@ -31,7 +37,7 @@ function Form(props : any) {
                     <i className="fas fa-plus-square"></i>
                 </button>
                 <div className="select">
-                    <select name="todos" className="filter-todo">
+                    <select onChange={statusHandler} name="todos" className="filter-todo">
                     <option value="all">All</option>
                     <option value="completed">Completed</option>
                     <option value="uncompleted">Uncompleted</option>
