@@ -7,9 +7,11 @@ Modal.setAppElement('#root');
 const modalStyles = {
     content: {
         margin: "auto",
-        height: "500px",
-        width: "500px",
-        transition: "1s"
+        height: "400px",
+        width: "350px",
+        transition: "5s",
+        backgroundColor: "blanchedalmond",
+        boxRadius: "20px"
     }
 }
 
@@ -82,14 +84,23 @@ function ToDoCard(props: any) {
         <div>
             <div className="todo-card" onClick={itemClick}>
                 <h2>{titleChange}</h2>
-                <ToDoItems toDoArr={toDoArr} />
+                <ToDoItems 
+                toDoArr={toDoArr} 
+                isModal={false} />
             </div>
-            <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={modalStyles}>
-                <input onChange={titleChangeHandler} value={titleChange}/><button onClick={deleteList}>x</button>
+            <Modal 
+            isOpen={modalOpen} 
+            onRequestClose={() => setModalOpen(false)} 
+            style={modalStyles}>
+                <input 
+                onChange={titleChangeHandler} 
+                value={titleChange}/>
+                    <button onClick={deleteList} className="item-del">&#x00D7;</button>
                 <ul>
                     <ToDoItems 
                     toDoArr={toDoArr}
-                    setToDoArr={setToDoArr} />
+                    setToDoArr={setToDoArr}
+                    isModal={true} />
                 </ul>
                 <input onKeyPress={handleKeyPress} onChange={inputHandler} value={inputText} type="text" />
             </Modal>

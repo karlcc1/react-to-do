@@ -13,16 +13,12 @@ function Form(props : any) {
     };
 
     return (
-        <div style={{border: "1px solid black"}}>
-            <h1>Form</h1>
-            <form>
-                <input value={props.inputTitle} onChange={titleHandler} type="text" className="todo-input" />
-                <button onClick={onButtonClick} className="todo-button" type="submit">
-                    <i className="fas fa-plus-square"></i>
-                </button>
-            </form>
-            <h1>{props.inputTitle}</h1>
-        </div>
+        <form>
+            <input value={props.inputTitle} onChange={titleHandler} type="text" className="todo-input" />
+            <button onClick={onButtonClick} className="todo-button" type="submit">
+                <i className="fas fa-plus-square"></i>
+            </button>
+        </form>
     )
 }
 

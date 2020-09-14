@@ -1,6 +1,44 @@
+body {
+    background-color: white;
+    font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 20px;
+    padding: 20px;
+}
+
+li {
+    font-size: 1.25em;
+}
 
 .todo-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.item-del {
+    float: right;
+    clear: right;
+    background-color: blanchedalmond;
+    cursor: pointer;
+    border: 0;
+    font-size: 1.06em;
+    padding: 0;
+
+}
+
+.item-del:hover {
+    background-color: #ffcc80;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
