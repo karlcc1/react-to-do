@@ -5,7 +5,8 @@ import Form from './Components/Form';
 import './App.css';
 
 function App() {
-  const [inputText, setInputText] = useState("");
+  const [title, setTitle] = useState("");
+  const [inputToDo, setInputToDo] = useState("");
   const [toDoList, setToDoList] = useState([]);
 
   useEffect(() => {
@@ -34,8 +35,8 @@ function App() {
     <div className="App">
       <Header />
       <Form 
-      inputText={inputText}
-      setInputText={setInputText} 
+      title={title}
+      setTitle={setTitle} 
       toDoList={toDoList}
       setToDoList={setToDoList} />      
       <ToDoContainer 

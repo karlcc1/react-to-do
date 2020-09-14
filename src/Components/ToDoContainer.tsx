@@ -1,16 +1,14 @@
 import React from 'react';
-import ToDoItem from './ToDoItem';
+import ToDoCard from './ToDoCard';
 
 function ToDoContainer(props : any) {
     return (
         <div style={{border: "1px solid black"}}>
             <h1>ToDoContainer</h1>
             <div className="todo-container">
-                <ul className="todo-list">
-                    {props.toDoList.map((item : any) => (
-                        <ToDoItem setToDoList={props.setToDoList} toDoList={props.toDoList} key={item.id} item={item}/>
+                        {props.toDoList.map((item : any) => (
+                            <ToDoCard setToDoList={props.setToDoList} toDoList={props.toDoList} key={item.id} item={item}/>
                     ))}
-                </ul>
             </div>
         </div>
     )
