@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  rootDir: 'react-to-do'
+  rootDir: '/react-to-do'
   buildDir: '$(rootDir)/build'
 
 pool:
