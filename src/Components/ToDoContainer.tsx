@@ -7,7 +7,13 @@ function ToDoContainer(props : any) {
             <h1>ToDoContainer</h1>
             <div className="todo-container">
                         {props.toDoList.map((item : any) => (
-                            <ToDoCard setToDoList={props.setToDoList} toDoList={props.toDoList} key={item.id} item={item}/>
+                            <ToDoCard 
+                            toDoList={props.toDoList} 
+                            setToDoList={props.setToDoList} 
+                            inputToDo={props.inputToDo}
+                            setInputToDo={props.setInputToDo}
+                            key={item.id} 
+                            item={item}/>
                     ))}
             </div>
         </div>

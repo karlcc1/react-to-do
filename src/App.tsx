@@ -5,8 +5,7 @@ import Form from './Components/Form';
 import './App.css';
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [inputToDo, setInputToDo] = useState("");
+  const [inputTitle, setInputTitle] = useState("");
   const [toDoList, setToDoList] = useState([]);
 
   useEffect(() => {
@@ -35,13 +34,13 @@ function App() {
     <div className="App">
       <Header />
       <Form 
-      title={title}
-      setTitle={setTitle} 
+      inputTitle={inputTitle}
+      setInputTitle={setInputTitle} 
       toDoList={toDoList}
       setToDoList={setToDoList} />      
       <ToDoContainer 
-      setToDoList={setToDoList}
-      toDoList={toDoList} />
+      toDoList={toDoList}
+      setToDoList={setToDoList} />
     </div>
   );
 }

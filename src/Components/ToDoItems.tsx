@@ -1,12 +1,21 @@
 import React from 'react';
-import { isTemplateExpression } from 'typescript';
 
 function ToDoItems(props : any) {
+
+    const delItem = (s : string) => {
+        console.log("delete " + s);  
+        const newArr = props.toDoArr.filter((x : string) => (x !== s));      
+        props.setToDoArr(newArr);
+    };
+
     return (
-        <div>
-            {/* <p>{props.item.content}</p> */}
-            {console.log(props.item)}
-        </div>
+        <ul>
+            {
+                props.toDoArr && props.toDoArr.map((item : string) => (
+                    <li key={item}>{item}<button onClick={() => delItem(item)} name={item}>x</button></li>
+                ))
+            }
+        </ul>
     );
 }
 
