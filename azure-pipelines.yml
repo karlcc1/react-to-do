@@ -17,7 +17,7 @@ steps:
 - script: |
     cd $(rootDir)
     npm install
-    npm run build
+    npm run start
     cd ..
   displayName: 'npm install and build'
 
