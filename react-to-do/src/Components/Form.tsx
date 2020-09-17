@@ -7,8 +7,13 @@ function Form(props : any) {
     };
 
     const onButtonClick = (e : React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        props.setToDoList([...props.toDoList, {id: Math.random()*100, title: props.inputTitle, content: []}]);
+        // e.preventDefault();
+        // props.setToDoList([...props.toDoList, {ToDoListID: Math.random()*100, Title: props.inputTitle}]);
+
+        fetch(`http://localhost:9000/toDoList/${props.inputTitle}`, {
+            method: 'POST'
+        });
+
         props.setInputTitle("");
     };
 

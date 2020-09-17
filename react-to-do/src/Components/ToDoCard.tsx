@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ToDoItems from './ToDoItems';
-import './ToDoCard.css';
 import Modal from 'react-modal';
+import './ToDoCard.css';
 Modal.setAppElement('#root');
 
 const modalStyles = {
@@ -17,17 +17,24 @@ const modalStyles = {
 
 function ToDoCard(props: any) {
     const [inputText, setInputText] = useState("");
-    const [titleChange, setTitleChange] = useState(props.item.title);
-    const [toDoArr, setToDoArr] = useState([] as string[]);
+    const [titleChange, setTitleChange] = useState(props.item.Title);
+    const [toDoArr, setToDoArr] = useState([] as any);
     const [modalOpen, setModalOpen] = useState(false);
 
+    // const [testArr, setTestArr] = useState([] as any[]);
+
+    const fetchItems = () => {
+        console.log("fetchitems()");
+        // console.log(props.item.ToDoListID);
+        fetch(`http://localhost:9000/toDoItems/${props.item.ToDoListID}`)
+          .then(res => res.json())
+          .then(res => setToDoArr(res)
+          );        
+    };
+
     useEffect(() => {
-        getLocalToDoItems();
+        fetchItems();
       }, []);
-    
-    useEffect(() => {
-        saveLocalToDoItems();
-      }, [toDoArr]);
 
     const itemClick = () => {
         setModalOpen(true);
@@ -39,51 +46,48 @@ function ToDoCard(props: any) {
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            setToDoArr([...toDoArr, inputText]);
+            console.log("new entry add");
+            
+            fetch(`http://localhost:9000/toDoItems/${props.item.ToDoListID}/${inputText}`, {
+                method: 'POST'})
+                .then(res => res.text())
+                .then(res => {
+                    setToDoArr([...toDoArr, {ToDoItemID: res, ToDoListID: props.item.ToDoListID, Name: inputText}]);
+                });            
+            
             setInputText("");
         }
     };
 
-    const saveLocalToDoItems = () => {
-        localStorage.setItem(`toDoArr_${props.item.title}`, JSON.stringify(toDoArr));
-    };
-
-    const getLocalToDoItems = () => {
-        if (localStorage.getItem(`toDoArr_${props.item.title}`) === null) {
-            localStorage.setItem(`toDoArr_${props.item.title}`, JSON.stringify([]));
-        } else {
-            let parsedLocal = localStorage.getItem(`toDoArr_${props.item.title}`);
-            let toDoLocal = JSON.parse(parsedLocal!);
-            setToDoArr(toDoLocal);
-        }
-    };
-
-    const deleteFromLocal = () => {
-        localStorage.setItem(`toDoArr_${props.item.title}`, JSON.stringify([]));
-    };
-
     const deleteList = () => {
-        console.log("deletelist " + props.item.title);
-        deleteFromLocal();
-        const newArr = props.toDoList.filter((x : any) => (x.title !== props.item.title));      
+        console.log("deletelist " + props.item.ToDoListID);
+        const newArr = props.toDoList.filter((x : any) => (x.ToDoListID !== props.item.ToDoListID));  
         props.setToDoList(newArr);
+        fetch(`http://localhost:9000/toDoList/${props.item.ToDoListID}`, {
+            method: 'DELETE'
+        });
+        setModalOpen(false);
+        window.location.reload();
     };
 
     const titleChangeHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
         setTitleChange(e.target.value);
-        
-        const newArr = props.toDoList.map((item : any) => {
-            if (item.id === props.item.id) {
-                return item.title = e.target.value
+        const newArr = props.toDoList.map((x : any) => {
+            if (x.ToDoListID === props.item.ToDoListID) {
+                return {ToDoListID: x.ToDoListID, Title: e.target.value}
             }
+            else { return x; }
         });
-        props.setToDoList();
+        props.setToDoList(newArr);
+        fetch(`http://localhost:9000/toDoList/${props.item.ToDoListID}/${e.target.value}`, {
+            method: 'PUT'
+        });
     };
 
     return (
         <div>
             <div className="todo-card" onClick={itemClick}>
-                <h2>{titleChange}</h2>
+                <h2>{props.item.Title}</h2>
                 <ToDoItems 
                 toDoArr={toDoArr} 
                 isModal={false} />

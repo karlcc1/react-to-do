@@ -11,7 +11,7 @@ function ToDoContainer(props : any) {
                             setToDoList={props.setToDoList} 
                             inputToDo={props.inputToDo}
                             setInputToDo={props.setInputToDo}
-                            key={item.id} 
+                            key={item.ToDoItemID} 
                             item={item}/>
                     ))}
             </div>

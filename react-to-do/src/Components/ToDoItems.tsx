@@ -2,11 +2,21 @@ import React from 'react';
 
 function ToDoItems(props : any) {
 
+    const delItem = (id : any) => {
+        console.log("delete " + id);  
+        const newArr = props.toDoArr.filter((x : any) => (x.ToDoItemID !== id));      
+        props.setToDoArr(newArr);
+
+        fetch(`http://localhost:9000/toDoItems/${id}`, {
+            method: 'DELETE'
+        });
+    };
+
     const passModal = 
         <ul>
             {
-                props.toDoArr && props.toDoArr.map((item : string) => (
-                    <li key={item}>{item}<button onClick={() => delItem(item)} name={item} className="item-del">&#x00D7;</button></li>
+                props.toDoArr && props.toDoArr.map((item : any) => (
+                    <li key={item.ToDoItemID}>{item.Name}<button onClick={() => delItem(item.ToDoItemID)} className="item-del">&#x00D7;</button></li>
                 ))
             }
         </ul>;
@@ -14,19 +24,11 @@ function ToDoItems(props : any) {
     const passCard = 
         <ul>
             {
-                props.toDoArr && props.toDoArr.slice(0,8).map((item : string) => (
-                    <li key={item}>{item}</li>
+                props.toDoArr && props.toDoArr.slice(0,8).map((item : any) => (
+                    <li key={item.ToDoItemID}>{item.Name}</li>
                 ))
             }
         </ul>;
-
-    const delItem = (s : string) => {
-        console.log("delete " + s);  
-        const newArr = props.toDoArr.filter((x : string) => (x !== s));      
-        props.setToDoArr(newArr);
-    };
-
-
 
     return (props.isModal ? passModal : passCard);
 }

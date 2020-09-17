@@ -8,27 +8,17 @@ function App() {
   const [inputTitle, setInputTitle] = useState("");
   const [toDoList, setToDoList] = useState([]);
 
+  const fetchToDoList = () => {
+    console.log("fetchToDoList()");
+    fetch("http://localhost:9000/toDoList")
+      .then(res => res.json())
+      .then(res => setToDoList(res)
+      );
+  };
+
   useEffect(() => {
-    getLocalToDos();
+    fetchToDoList();    
   }, []);
-
-  useEffect(() => {
-    saveLocalToDos();
-  }, [toDoList]);
-
-  const saveLocalToDos = () => {
-      localStorage.setItem('toDoList', JSON.stringify(toDoList));
-  };  
-
-  const getLocalToDos = () => {
-    if (localStorage.getItem('toDoList') === null) {
-      localStorage.setItem('toDoList', JSON.stringify([]));
-    } else {
-      let parsedLocal = localStorage.getItem('toDoList');
-      let toDoLocal = JSON.parse(parsedLocal!);
-      setToDoList(toDoLocal);
-    }
-  };  
 
   return (
     <div className="App">
