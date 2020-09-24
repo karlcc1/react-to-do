@@ -7,7 +7,7 @@ function ToDoItems(props : any) {
         const newArr = props.toDoArr.filter((x : any) => (x.ToDoItemID !== id));      
         props.setToDoArr(newArr);
 
-        fetch(`http://localhost:9000/toDoItems/${id}`, {
+        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${id}`, {
             method: 'DELETE'
         });
     };

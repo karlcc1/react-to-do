@@ -17,7 +17,7 @@ const modalStyles = {
 
 function ToDoCard(props: any) {
     const [inputText, setInputText] = useState("");
-    const [titleChange, setTitleChange] = useState(props.item.Title);
+    const [titleChange, setTitleChange] = useState("");
     const [toDoArr, setToDoArr] = useState([] as any);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -26,7 +26,7 @@ function ToDoCard(props: any) {
     const fetchItems = () => {
         console.log("fetchitems()");
         // console.log(props.item.ToDoListID);
-        fetch(`http://localhost:9000/toDoItems/${props.item.ToDoListID}`)
+        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}`)
           .then(res => res.json())
           .then(res => setToDoArr(res)
           );        
@@ -48,12 +48,12 @@ function ToDoCard(props: any) {
         if (e.key === 'Enter') {
             console.log("new entry add");
             
-            fetch(`http://localhost:9000/toDoItems/${props.item.ToDoListID}/${inputText}`, {
+            fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}/${inputText}`, {
                 method: 'POST'})
                 .then(res => res.text())
                 .then(res => {
                     setToDoArr([...toDoArr, {ToDoItemID: res, ToDoListID: props.item.ToDoListID, Name: inputText}]);
-                });            
+                });
             
             setInputText("");
         }
@@ -63,11 +63,12 @@ function ToDoCard(props: any) {
         console.log("deletelist " + props.item.ToDoListID);
         const newArr = props.toDoList.filter((x : any) => (x.ToDoListID !== props.item.ToDoListID));  
         props.setToDoList(newArr);
-        fetch(`http://localhost:9000/toDoList/${props.item.ToDoListID}`, {
+        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}`, {
             method: 'DELETE'
         });
         setModalOpen(false);
-        window.location.reload();
+        setTitleChange("");
+        // window.location.reload();
     };
 
     const titleChangeHandler = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -79,9 +80,14 @@ function ToDoCard(props: any) {
             else { return x; }
         });
         props.setToDoList(newArr);
-        fetch(`http://localhost:9000/toDoList/${props.item.ToDoListID}/${e.target.value}`, {
+        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}/${e.target.value}`, {
             method: 'PUT'
         });
+    };
+
+    const afterOpenModal = () => {
+        console.log("modal open");
+        setTitleChange(props.item.Title);
     };
 
     return (
@@ -95,6 +101,7 @@ function ToDoCard(props: any) {
             <Modal 
             isOpen={modalOpen} 
             onRequestClose={() => setModalOpen(false)} 
+            onAfterOpen={afterOpenModal}
             style={modalStyles}>
                 <input 
                 onChange={titleChangeHandler} 

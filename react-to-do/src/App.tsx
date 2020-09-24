@@ -10,14 +10,14 @@ function App() {
 
   const fetchToDoList = () => {
     console.log("fetchToDoList()");
-    fetch("http://localhost:9000/toDoList")
+    fetch("https://karl-react-to-do-backend.herokuapp.com/toDoList")
       .then(res => res.json())
       .then(res => setToDoList(res)
       );
   };
 
   useEffect(() => {
-    fetchToDoList();    
+    fetchToDoList();
   }, []);
 
   return (
