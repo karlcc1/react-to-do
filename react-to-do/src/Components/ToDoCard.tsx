@@ -11,7 +11,8 @@ const modalStyles = {
         width: "350px",
         transition: "5s",
         backgroundColor: "blanchedalmond",
-        boxRadius: "20px"
+        borderRadius: "2%",
+        border: "0"
     }
 }
 
@@ -24,8 +25,6 @@ function ToDoCard(props: any) {
     // const [testArr, setTestArr] = useState([] as any[]);
 
     const fetchItems = () => {
-        console.log("fetchitems()");
-        // console.log(props.item.ToDoListID);
         fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}`)
           .then(res => res.json())
           .then(res => setToDoArr(res)
@@ -104,16 +103,23 @@ function ToDoCard(props: any) {
             onAfterOpen={afterOpenModal}
             style={modalStyles}>
                 <input 
+                className="title-input"
                 onChange={titleChangeHandler} 
-                value={titleChange}/>
+                value={titleChange}
+                maxLength={12}/>
                     <button onClick={deleteList} className="item-del">&#x00D7;</button>
-                <ul>
                     <ToDoItems 
                     toDoArr={toDoArr}
                     setToDoArr={setToDoArr}
-                    isModal={true} />
-                </ul>
-                <input onKeyPress={handleKeyPress} onChange={inputHandler} value={inputText} type="text" />
+                    isModal={true} />                
+                <input 
+                className="new-note-input"
+                onKeyPress={handleKeyPress}
+                onChange={inputHandler}
+                value={inputText}
+                placeholder="Add note . . ."
+                maxLength={23}
+                type="text" />
             </Modal>
         </div>
     );

@@ -7,19 +7,15 @@ function Form(props : any) {
     };
 
     const onButtonClick = (e : React.MouseEvent<HTMLButtonElement>) => {
-        // e.preventDefault();
-        // props.setToDoList([...props.toDoList, {ToDoListID: Math.random()*100, Title: props.inputTitle}]);
-
         fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.inputTitle}`, {
             method: 'POST'
         });
-
         props.setInputTitle("");
     };
 
     return (
         <form>
-            <input value={props.inputTitle} onChange={titleHandler} type="text" className="todo-input" />
+            <input value={props.inputTitle} onChange={titleHandler} type="text" className="todo-input" ref="todoInput" maxLength={12}/>
             <button onClick={onButtonClick} className="todo-button" type="submit">
                 <i className="fas fa-plus-square"></i>
             </button>

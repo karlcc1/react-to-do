@@ -6,8 +6,7 @@ function ToDoContainer(props : any) {
         <div>
             <div className="todo-container">
                         {props.toDoList.map((item : any) => (
-                            <ToDoCard 
-                            
+                            <ToDoCard                             
                             toDoList={props.toDoList} 
                             setToDoList={props.setToDoList} 
                             key={item.ToDoItemID} 
