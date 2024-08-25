@@ -7,9 +7,9 @@ function ToDoItems(props : any) {
         const newArr = props.toDoArr.filter((x : any) => (x.ToDoItemID !== id));      
         props.setToDoArr(newArr);
 
-        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${id}`, {
-            method: 'DELETE'
-        });
+        // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${id}`, {
+        //     method: 'DELETE'
+        // });
     };
 
     const passModal = 

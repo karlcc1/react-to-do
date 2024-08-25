@@ -12,10 +12,10 @@ function App() {
 
   const fetchToDoList = () => {
     console.log("fetchToDoList()");
-    fetch("https://karl-react-to-do-backend.herokuapp.com/toDoList")
-      .then(res => res.json())
-      .then(res => setToDoList(res)
-      ).catch(err => console.log(err));
+    // fetch("https://karl-react-to-do-backend.herokuapp.com/toDoList")
+    //   .then(res => res.json())
+    //   .then(res => setToDoList(res)
+    //   ).catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -47,19 +47,19 @@ function App() {
 
   const postTitle = () => {
     console.log("postTitle()");
-    fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${inputTitle}`, {
-        method: 'POST'
-    }).then(res => res.json())
-    .then(res => {
-      const newArr = toDoList.map((x : any) => {
-          if (x.ToDoListID === 0) {
-              return {ToDoListID: res, Title: x.Title}
-          }
-          else { return x; }
-      });
-      return newArr;
-    }).then(newArr => setToDoList(newArr))
-    .catch(err => console.log(err));
+    // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${inputTitle}`, {
+    //     method: 'POST'
+    // }).then(res => res.json())
+    // .then(res => {
+    //   const newArr = toDoList.map((x : any) => {
+    //       if (x.ToDoListID === 0) {
+    //           return {ToDoListID: res, Title: x.Title}
+    //       }
+    //       else { return x; }
+    //   });
+    //   return newArr;
+    // }).then(newArr => setToDoList(newArr))
+    // .catch(err => console.log(err));
 
     firstPost.current = false;
     setInputTitle("");

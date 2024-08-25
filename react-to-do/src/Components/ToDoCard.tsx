@@ -22,13 +22,13 @@ function ToDoCard(props: any) {
     const [toDoArr, setToDoArr] = useState([] as any);
     const [modalOpen, setModalOpen] = useState(false);
 
-    // const [testArr, setTestArr] = useState([] as any[]);
+    const [testArr, setTestArr] = useState([] as any[]);
 
     const fetchItems = () => {
-        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}`)
-          .then(res => res.json())
-          .then(res => setToDoArr(res)
-          );        
+        // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}`)
+        //   .then(res => res.json())
+        //   .then(res => setToDoArr(res)
+        //   );        
     };
 
     useEffect(() => {
@@ -47,13 +47,14 @@ function ToDoCard(props: any) {
         if (e.key === 'Enter') {
             console.log("new entry add");
             
-            fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}/${inputText}`, {
-                method: 'POST'})
-                .then(res => res.text())
-                .then(res => {
-                    setToDoArr([...toDoArr, {ToDoItemID: res, ToDoListID: props.item.ToDoListID, Name: inputText}]);
-                });
+            // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoItems/${props.item.ToDoListID}/${inputText}`, {
+            //     method: 'POST'})
+            //     .then(res => res.text())
+            //     .then(res => {
+            //         setToDoArr([...toDoArr, {ToDoItemID: res, ToDoListID: props.item.ToDoListID, Name: inputText}]);
+            //     });
             
+            setToDoArr([...toDoArr, {ToDoItemID: Math.floor(Math.random() * 1000000), ToDoListID: props.item.ToDoListID, Name: inputText}]);
             setInputText("");
         }
     };
@@ -62,9 +63,9 @@ function ToDoCard(props: any) {
         console.log("deletelist " + props.item.ToDoListID);
         const newArr = props.toDoList.filter((x : any) => (x.ToDoListID !== props.item.ToDoListID));  
         props.setToDoList(newArr);
-        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}`, {
-            method: 'DELETE'
-        });
+        // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}`, {
+        //     method: 'DELETE'
+        // });
         setModalOpen(false);
         setTitleChange("");
         // window.location.reload();
@@ -79,9 +80,9 @@ function ToDoCard(props: any) {
             else { return x; }
         });
         props.setToDoList(newArr);
-        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}/${e.target.value}`, {
-            method: 'PUT'
-        });
+        // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.item.ToDoListID}/${e.target.value}`, {
+        //     method: 'PUT'
+        // });
     };
 
     const afterOpenModal = () => {

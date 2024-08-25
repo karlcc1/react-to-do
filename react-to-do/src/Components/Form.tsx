@@ -7,9 +7,9 @@ function Form(props : any) {
     };
 
     const onButtonClick = (e : React.MouseEvent<HTMLButtonElement>) => {
-        fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.inputTitle}`, {
-            method: 'POST'
-        });
+        // fetch(`https://karl-react-to-do-backend.herokuapp.com/toDoList/${props.inputTitle}`, {
+        //     method: 'POST'
+        // });
         props.setInputTitle("");
     };
 
