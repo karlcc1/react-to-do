@@ -3,7 +3,7 @@ trigger:
 
 variables:
   rootDir: 'react-to-do'
-  buildDir: '$(rootDir)/build'
+  buildDir: '$(rootDir)/react-to-do/build'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -31,6 +31,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'react-to-do/react-to-do/build'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
