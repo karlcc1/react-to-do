@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set \"TSC_COMPILE_ON_ERROR=true\" && react-scripts build",
+    "build": "export TSC_COMPILE_ON_ERROR=true && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
